@@ -4,7 +4,7 @@ title: Support
 
 # Support
 
-Support page for bbproject apps: EasyDrop, MemoItda, and Word Defense. · [한국어](/support)
+Support page for bbproject apps: Berry Cam, EasyDrop, MemoItda, and Word Defense. · [한국어](/support)
 
 ## Contact
 
@@ -17,5 +17,6 @@ Including the **app name, device model, iOS version, and app version** helps us 
 ## Privacy Policies
 
 - [Word Defense: Blue Hole Diver](/en/worddefense/privacy)
+- [Berry Cam (Korean)](/berrycam/privacy)
 - [EasyDrop (Korean)](/easydrop/privacy)
 - [MemoItda (Korean)](/memoitda/privacy)
