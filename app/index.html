@@ -119,6 +119,7 @@
 
   footer { padding: 28px 0; font-size: 13px; color: var(--sub); text-align: center; }
   footer a { color: var(--sub); }
+  footer .consent { margin-top: 20px; text-align: left; }
 
   @media (min-width: 720px) {
     h2 { font-size: 30px; }
@@ -171,17 +172,7 @@
         <input type="email" name="email" required maxlength="100" autocomplete="email" inputmode="email" placeholder="example@email.com">
       </label>
 
-      <div class="consent">
-        <details>
-          <summary>개인정보 수집·이용 안내</summary>
-          <dl>
-            <dt>수집 항목</dt><dd>이메일, 문의 내용</dd>
-            <dt>이용 목적</dt><dd>개발 가능 여부 검토 및 상담</dd>
-            <dt>보관 기간</dt><dd>상담 종료 후 3개월 이내 삭제</dd>
-          </dl>
-          <p>아이디어와 자료는 견적·상담 목적으로만 사용하며, 동의 없이 제3자에게 공개하거나 도용하지 않습니다.</p>
-        </details>
-      </div>
+
 
       <p class="msg err" id="err" role="alert"></p>
 
@@ -274,6 +265,17 @@
   <div class="wrap">
     bbproject · <a href="mailto:tkdhi0107@gmail.com">tkdhi0107@gmail.com</a>
     <p style="margin-top:8px">이 페이지는 방문 통계를 위해 Google Analytics를 사용합니다. 문의 내용과 이메일은 Google Analytics로 보내지 않습니다.</p>
+      <div class="consent">
+        <details>
+          <summary>개인정보 수집·이용 안내</summary>
+          <dl>
+            <dt>수집 항목</dt><dd>이메일, 문의 내용</dd>
+            <dt>이용 목적</dt><dd>개발 가능 여부 검토 및 상담</dd>
+            <dt>보관 기간</dt><dd>상담 종료 후 3개월 이내 삭제</dd>
+          </dl>
+          <p>아이디어와 자료는 견적·상담 목적으로만 사용하며, 동의 없이 제3자에게 공개하거나 도용하지 않습니다.</p>
+        </details>
+      </div>
   </div>
 </footer>
 
