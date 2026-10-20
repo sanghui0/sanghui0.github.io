@@ -108,8 +108,6 @@
   .consent dl { margin: 0 0 12px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; color: var(--sub); }
   .consent dt { font-weight: 600; color: var(--ink); }
   .consent dd { margin: 0; }
-  .consent label { display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: 15px; cursor: pointer; }
-  .consent input { width: 20px; height: 20px; accent-color: var(--accent); }
   .msg { font-size: 15px; padding: 14px 16px; border-radius: 12px; display: none; }
   .msg.show { display: block; }
   .msg.err { background: #fdecea; color: var(--err); }
@@ -133,7 +131,7 @@
   .intro h1 { font-size: clamp(26px, 5vw, 34px); margin-bottom: 12px; }
   .intro > p:last-child { color: var(--sub); }
   .consent { padding: 12px 14px; }
-  .consent details { margin-bottom: 12px; color: var(--sub); }
+  .consent details { color: var(--sub); }
   summary { cursor: pointer; font-weight: 600; }
   summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   .consent dl { margin-top: 12px; }
@@ -181,10 +179,8 @@
             <dt>이용 목적</dt><dd>개발 가능 여부 검토 및 상담</dd>
             <dt>보관 기간</dt><dd>상담 종료 후 3개월 이내 삭제</dd>
           </dl>
-          <p>동의를 거부할 수 있으나, 문의 접수는 제한됩니다.</p>
           <p>아이디어와 자료는 견적·상담 목적으로만 사용하며, 동의 없이 제3자에게 공개하거나 도용하지 않습니다.</p>
         </details>
-        <label><input type="checkbox" name="agree" required> 개인정보 수집·이용에 동의합니다 (필수)</label>
       </div>
 
       <p class="msg err" id="err" role="alert"></p>
@@ -314,7 +310,6 @@
     if (!content) return showError('문의 내용을 적어주세요.');
     if (!email) return showError('답변받을 이메일 주소를 적어주세요.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('이메일 주소 형식을 확인해주세요.');
-    if (!data.get('agree')) return showError('개인정보 수집·이용에 동의해야 문의를 보낼 수 있습니다.');
     if (!ENDPOINT) return showError('아직 문의를 받을 준비가 되지 않았습니다. tkdhi0107@gmail.com으로 보내주세요.');
 
     submissionId ??= crypto.randomUUID();
@@ -324,7 +319,7 @@
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: submissionId, content, email, agreed: true }),
+        body: JSON.stringify({ id: submissionId, content, email }),
       });
       if (!res.ok) throw new Error(String(res.status));
       // 노션 저장이 성공했을 때만 접수 완료를 보여준다.
