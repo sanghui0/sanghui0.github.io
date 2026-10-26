@@ -3,21 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>앱 제작 상담 · bbproject</title>
-<meta name="description" content="아이디어를 간단히 남겨주세요. 제작 가능한 범위를 안내해드립니다.">
-<meta property="og:title" content="만들고 싶은 앱이 있나요?">
-<meta property="og:description" content="아이디어를 간단히 남겨주세요. 제작 가능한 범위를 안내해드립니다.">
+<title>필요한 기능부터, 작게 만드는 앱 제작 · bbproject</title>
+<meta name="description" content="간단한 기능 3개 · 안드로이드 설치 파일 · 수정 1회. 제작비 5만원, 상담 후 범위를 확인하고 진행합니다.">
+<meta property="og:title" content="필요한 기능부터, 작게 만드는 앱 제작">
+<meta property="og:description" content="간단한 기능 3개 · 안드로이드 설치 파일 · 수정 1회. 제작비 5만원, 상담 후 범위를 확인하고 진행합니다.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root {
-    --ink: #16181d;
-    --sub: #5b616e;
-    --line: #e6e8ec;
-    --bg: #ffffff;
-    --soft: #f5f6f8;
-    --accent: #ff5a1f;
+    --ink: #0f1b3d;
+    --sub: #55627f;
+    --line: #dfe5f2;
+    --bg: #f7f9fd;
+    --soft: #eef2fb;
+    --accent: #315BDB;
     --accent-ink: #ffffff;
-    --ok: #12805c;
     --err: #c62828;
   }
   * { box-sizing: border-box; }
@@ -37,8 +36,12 @@
   h2 { font-size: 26px; margin-bottom: 20px; }
   p { margin: 0; }
 
+  .ic { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
     padding: 17px 20px;
     border: 0;
@@ -51,6 +54,7 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    box-shadow: 0 6px 16px -8px rgba(49, 91, 219, 0.6);
   }
   .btn:disabled { opacity: 0.5; cursor: default; }
 
@@ -59,7 +63,7 @@
   .app { border-top: 1px solid var(--line); padding-top: 28px; }
   .app-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
   .app h3 { font-size: 20px; }
-  .badge { font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: #e8f5ee; color: var(--ok); }
+  .badge { font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--soft); color: var(--accent); }
   .app .one { color: var(--sub); margin-bottom: 4px; }
   .app .role { font-size: 14px; color: var(--sub); margin-bottom: 16px; }
   .app .role b { color: var(--ink); font-weight: 600; }
@@ -95,7 +99,7 @@
   textarea, input[type="email"] {
     width: 100%;
     padding: 14px;
-    border: 1px solid #d4d7dd;
+    border: 1px solid #cdd6ec;
     border-radius: 12px;
     background: #fff;
     font: inherit;
@@ -127,16 +131,49 @@
     .shots { max-width: 520px; }
     .shots.wide { max-width: none; grid-template-columns: 1fr 1fr; }
   }
-  .intro { margin-bottom: 28px; }
-  .intro .brand { font-size: 13px; color: var(--sub); margin-bottom: 16px; }
-  .intro h1 { font-size: clamp(26px, 5vw, 34px); margin-bottom: 12px; }
-  .intro > p:last-child { color: var(--sub); }
+  .intro { margin-bottom: 20px; }
+  .intro .brand { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--sub); margin-bottom: 18px; }
+  .intro .brand span { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: var(--accent); color: #fff; }
+  .intro .brand .ic { width: 18px; height: 18px; }
+  .intro h1 { font-size: clamp(27px, 6vw, 36px); line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 16px; }
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px 7px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+  .chips .ic { width: 18px; height: 18px; color: var(--accent); }
+  .showcase { margin-bottom: 20px; }
+  .showcase h2 { font-size: 14px; color: var(--sub); margin: 0 0 10px; letter-spacing: 0; }
+  .showcase-row { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; margin: 0 -20px; padding: 0 20px 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .showcase-row::-webkit-scrollbar { display: none; }
+  .showcase-card { flex: 0 0 42%; min-width: 132px; scroll-snap-align: start; color: inherit; text-decoration: none; }
+  .showcase-card.wide { flex-basis: 72%; }
+  .showcase-card .pic { height: 176px; display: flex; overflow: hidden; background: #fff; border-radius: 14px; border: 1px solid var(--line); padding: 8px; box-shadow: 0 8px 20px -14px rgba(15, 27, 61, 0.35); }
+  .showcase-card img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .showcase-card b { display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 14px; }
+  .showcase-card b .ic { width: 14px; height: 14px; color: var(--accent); transform: rotate(-45deg); }
+  @media (min-width: 720px) {
+    .showcase-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.7fr); overflow: visible; margin: 0; padding: 0; }
+    .showcase-card, .showcase-card.wide { min-width: 0; }
+    .showcase-card .pic { height: 210px; }
+  }
+  .price-box { margin-bottom: 20px; padding: 16px 18px; border-radius: 16px; background: var(--soft); }
+  .price { font-size: 16px; font-weight: 600; }
+  .price strong { font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; }
+  .price-sub { font-size: 14px; color: var(--sub); margin-top: 2px; }
   .consent { padding: 12px 14px; }
   .consent details { color: var(--sub); }
   summary { cursor: pointer; font-weight: 600; }
   summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   .consent dl { margin-top: 12px; }
   .consent details p { margin-top: 8px; }
+  [hidden] { display: none !important; }
+  .step-body { display: grid; gap: 18px; }
+  form { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: 0 12px 28px -20px rgba(15, 27, 61, 0.4); }
+  .step-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .step { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .bar { display: flex; gap: 4px; }
+  .bar i { width: 28px; height: 4px; border-radius: 2px; background: var(--line); }
+  form[data-step="1"] .bar i:first-child, form[data-step="2"] .bar i { background: var(--accent); }
+  .back { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; background: none; padding: 8px; font: inherit; font-size: 15px; color: var(--sub); cursor: pointer; }
+  .back .ic { width: 18px; height: 18px; }
   .more { padding: 0; }
   .more details { border-top: 1px solid var(--line); padding: 18px 0; }
   .more details > summary { color: var(--sub); }
@@ -154,30 +191,79 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-brand" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M9.5 10.5l2 2 3.5-4"/><path d="M10.5 18h3"/></symbol>
+  <symbol id="i-features" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+  <symbol id="i-apk" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-revise" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1.1-4.5A8 8 0 1 1 21 12z"/></symbol>
+</svg>
+
 <section class="form-sec" id="contact">
   <div class="wrap">
     <header class="intro">
-      <p class="brand">bbproject · 앱 제작 상담</p>
-      <h1>만들고 싶은 앱이 있나요?</h1>
-      <p>아이디어를 간단히 남겨주세요.<br>제작 가능한 범위를 안내해드립니다.</p>
+      <p class="brand"><span><svg class="ic" aria-hidden="true"><use href="#i-brand"/></svg></span>bbproject · 앱 제작 상담</p>
+      <h1>필요한 기능부터,<br>작게 만드는 앱 제작</h1>
+      <ul class="chips">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-features"/></svg>간단한 기능 3개</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-apk"/></svg>안드로이드 설치 파일</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-revise"/></svg>수정 1회</li>
+      </ul>
     </header>
 
-    <form id="form" novalidate>
-      <label class="field">앱 아이디어
-        <span class="hint">앱 아이디어와 필요한 기능을 간단히 적어주세요.</span>
-        <textarea name="content" required maxlength="2000" placeholder="예: 동네 모임 일정과 참석 여부를 관리하는 앱을 만들고 싶어요."></textarea>
-      </label>
+    <div class="showcase">
+      <h2>만든 앱</h2>
+      <div class="showcase-row">
+        <a class="showcase-card" href="https://apps.apple.com/kr/app/id6475187563" target="_blank" rel="noopener">
+          <div class="pic"><img src="img/flight_1.jpg" alt="쾌속항공 첫 화면, 탑승권 모양의 학습 진행 카드" width="600" height="1067"></div>
+          <b>쾌속항공<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></b>
+        </a>
+        <a class="showcase-card" href="https://apps.apple.com/kr/app/id6821806317" target="_blank" rel="noopener">
+          <div class="pic"><img src="img/shortscook_1.jpg" alt="쇼츠쿡 홈, 저장한 레시피 목록" width="600" height="1299"></div>
+          <b>쇼츠쿡<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></b>
+        </a>
+        <a class="showcase-card wide" href="https://apps.apple.com/kr/app/id6808081166" target="_blank" rel="noopener">
+          <div class="pic"><img src="img/worddefense_1.jpg" alt="단어 디펜스 단어 학습 화면" width="1000" height="462"></div>
+          <b>단어 디펜스<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></b>
+        </a>
+      </div>
+    </div>
 
-      <label class="field">답변받을 이메일
-        <input type="email" name="email" required maxlength="100" autocomplete="email" inputmode="email" placeholder="example@email.com">
-      </label>
+    <div class="price-box">
+      <p class="price">제작비 <strong>5만원</strong>. 상담 후 범위를 확인하고 진행합니다.</p>
+      <p class="price-sub">서버·결제·채팅·스토어 출시는 별도</p>
+    </div>
 
+    <form id="form" novalidate data-step="1">
+      <div class="step-head">
+        <p class="step" id="stepLabel" aria-live="polite">1/2 아이디어</p>
+        <div class="bar" aria-hidden="true"><i></i><i></i></div>
+      </div>
 
+      <div id="step1" class="step-body">
+        <label class="field">앱 아이디어
+          <span class="hint">앱 아이디어와 필요한 기능을 간단히 적어주세요.</span>
+          <textarea name="content" required maxlength="2000" placeholder="예: 동네 모임 일정과 참석 여부를 관리하는 앱을 만들고 싶어요."></textarea>
+        </label>
 
-      <p class="msg err" id="err" role="alert"></p>
+        <p class="msg err" id="err1" role="alert"></p>
 
-      <button class="btn" type="submit" id="submit">내 아이디어 제작 가능한지 물어보기</button>
-      <p class="after">접수 후 2영업일 이내, 진행 가능한 경우 남겨주신 이메일로 연락드립니다.</p>
+        <button class="btn" type="button" id="next">다음<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+
+      <div id="step2" class="step-body" hidden>
+        <label class="field">답변받을 이메일
+          <input type="email" name="email" required maxlength="100" autocomplete="email" inputmode="email" placeholder="example@email.com">
+        </label>
+
+        <p class="msg err" id="err2" role="alert"></p>
+
+        <button class="btn" type="submit" id="submit"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span id="submitLabel">무료로 상담하기</span></button>
+        <button class="back" type="button" id="back"><svg class="ic" aria-hidden="true"><use href="#i-back"/></svg>이전</button>
+        <p class="after">접수 후 2영업일 이내, 진행 가능한 경우 남겨주신 이메일로 연락드립니다.</p>
+      </div>
     </form>
 
     <div class="done" id="done" role="status">
@@ -221,7 +307,7 @@
       <li>제작 · 전달</li>
     </ol>
   </details>
-  <details><summary>직접 만든 앱 보기</summary>
+  <details id="portfolio"><summary>직접 만든 앱 보기</summary>
 <h2>직접 만들고,<br>출시까지 해봤습니다.</h2>
     <div class="apps">
 
@@ -244,6 +330,7 @@
           <img src="img/shortscook_1.jpg" alt="쇼츠쿡 홈, 저장한 레시피 목록" loading="lazy" width="600" height="1299">
           <img src="img/shortscook_2.jpg" alt="쇼츠쿡 레시피 상세, 영상과 재료 목록" loading="lazy" width="600" height="1299">
         </div>
+        <a class="store" href="https://apps.apple.com/kr/app/id6821806317" target="_blank" rel="noopener">App Store에서 보기 →</a>
       </article>
 
       <article class="app">
@@ -285,7 +372,14 @@
 
   const form = document.getElementById('form');
   const btn = document.getElementById('submit');
-  const err = document.getElementById('err');
+  const submitLabel = document.getElementById('submitLabel');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const stepLabel = document.getElementById('stepLabel');
+  const errs = [document.getElementById('err1'), document.getElementById('err2')];
+  const contentEl = form.elements.content;
+  const emailEl = form.elements.email;
+  let step = 1;
   const done = document.getElementById('done');
 
   // GA4 이벤트. 문의 내용·이메일 같은 개인정보는 절대 매개변수에 넣지 않는다.
@@ -299,24 +393,44 @@
   form.addEventListener('input', () => { submissionId = null; });
 
   function showError(text) {
+    const err = errs[step - 1];
     err.textContent = text;
     err.classList.add('show');
   }
 
+  function goStep(n) {
+    step = n;
+    form.dataset.step = n;
+    errs.forEach((e) => e.classList.remove('show'));
+    step1.hidden = n !== 1;
+    step2.hidden = n !== 2;
+    stepLabel.textContent = n === 1 ? '1/2 아이디어' : '2/2 연락처';
+    (n === 1 ? contentEl : emailEl).focus();
+  }
+
+  function goNext() {
+    if (!contentEl.value.trim()) return showError('문의 내용을 적어주세요.');
+    goStep(2);
+  }
+
+  document.getElementById('next').addEventListener('click', goNext);
+  document.getElementById('back').addEventListener('click', () => goStep(1));
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    err.classList.remove('show');
+    if (step === 1) return goNext();
+    errs[1].classList.remove('show');
     const data = new FormData(form);
     const content = (data.get('content') || '').trim();
     const email = (data.get('email') || '').trim();
-    if (!content) return showError('문의 내용을 적어주세요.');
+    if (!content) { goStep(1); return showError('문의 내용을 적어주세요.'); }
     if (!email) return showError('답변받을 이메일 주소를 적어주세요.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showError('이메일 주소 형식을 확인해주세요.');
     if (!ENDPOINT) return showError('아직 문의를 받을 준비가 되지 않았습니다. tkdhi0107@gmail.com으로 보내주세요.');
 
     submissionId ??= crypto.randomUUID();
     btn.disabled = true;
-    btn.textContent = '보내는 중…';
+    submitLabel.textContent = '보내는 중…';
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
@@ -332,7 +446,7 @@
       track('inquiry_fail');
       showError('접수하지 못했습니다. 잠시 후 다시 눌러주세요. 계속 안 되면 tkdhi0107@gmail.com으로 보내주세요.');
       btn.disabled = false;
-      btn.textContent = '내 아이디어 제작 가능한지 물어보기';
+      submitLabel.textContent = '무료로 상담하기';
     }
   });
 </script>
