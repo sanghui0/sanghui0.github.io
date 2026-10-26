@@ -17,6 +17,6 @@ Including the **app name, device model, iOS version, and app version** helps us 
 ## Privacy Policies
 
 - [Word Defense: Blue Hole Diver](/en/worddefense/privacy)
-- [Berry Cam (Korean)](/berrycam/privacy)
+- [BerryCam](/en/berrycam/privacy)
 - [EasyDrop (Korean)](/easydrop/privacy)
 - [MemoItda (Korean)](/memoitda/privacy)
